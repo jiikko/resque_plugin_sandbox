@@ -1,0 +1,2 @@
+# Resque Plugin Sandbox
+

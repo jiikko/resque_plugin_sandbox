@@ -1,0 +1,21 @@
+# 1.upto(20) { |i| puts "worker: DYNO='worker.#{i}' QUEUE=* INTERVAL=1 bundle exec rake resque:work" }
+worker: DYNO='worker.1' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.2' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.3' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.4' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.5' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.6' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.7' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.8' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.9' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.10' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.11' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.12' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.13' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.14' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.15' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.16' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.17' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.18' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.19' QUEUE=* INTERVAL=1 bundle exec rake resque:work
+worker: DYNO='worker.20' QUEUE=* INTERVAL=1 bundle exec rake resque:work

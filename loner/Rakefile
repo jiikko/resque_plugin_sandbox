@@ -1,0 +1,6 @@
+Bundler.require
+require 'resque/tasks'
+
+task "resque:setup" do
+  require './lib/base'
+end
