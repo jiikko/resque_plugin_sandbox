@@ -14,10 +14,14 @@ def init
 end
 
 def set_data
+  jobs = []
   DATA_SIZE.times do
-    BlockingWorker.perform_async(1)
-    BlockingWorker.perform_async(2)
+    jobs.push(->{ BlockingWorker.perform_async(1) })
+    jobs.push(->{ BlockingWorker.perform_async(2) })
+    jobs.push(->{ BlockingWorker.perform_async(3) })
+    jobs.push(->{ ParallelableWorker })
   end
+  jobs.shuffle.each { |j| j.call }
   raise('not set data!!!') if Resque.info[:pending].zero?
   @will_do_jobs_count = Resque.info[:pending]
 end
@@ -25,9 +29,7 @@ end
 def run
   worker_pids = []
   WORKERS_COUNT.times do
-    Thread.new do
-      worker_pids << spawn("QUEUE=normal INTERVAL=0.1 rake resque:work")
-    end
+    worker_pids << spawn("QUEUE=normal INTERVAL=0.1 rake resque:work")
   end
 
   loop do
@@ -40,6 +42,10 @@ def run
   end
   worker_pids.each { |pid| Process.kill('TERM', pid) }
 end
+
+# 各ジョブの引数毎に
+#   かかった時間を表示したい
+#   実行した個数
 
 def show_report(realtime)
 jps = (realtime / Resque::Stat.get(:processed))

@@ -32,6 +32,8 @@ end
 
 class ParallelableWorker < Base
   def self.perform
+    log!('ParallelableWorker: ok!')
+    sleep(2)
   end
 end
 
@@ -41,7 +43,7 @@ class BlockingWorker < Base
     loop do
       result = Resque.redis.sadd("blocked_queues", primary_id)
       if result
-        log!('ok!')
+        log!('BlockingWorker: ok!')
         sleep(2)
         Resque.redis.srem("blocked_queues", primary_id)
         return
