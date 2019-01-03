@@ -33,11 +33,11 @@ def run
   end
 
   loop do
-    if Resque.info[:processed] == @will_do_jobs_count
-      break
-    else
+    if Resque.workers.any?(&:working?)
       sleep(1)
       next
+    else
+      break
     end
   end
   worker_pids.each { |pid| Process.kill('TERM', pid) }
