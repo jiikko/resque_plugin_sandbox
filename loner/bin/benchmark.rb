@@ -9,8 +9,6 @@ DATA_SIZE = 10
 
 def init
   Resque::Stat.clear(:processed)
-  #Resque.logger = Logger.new('./benchmark.log')
-  Resque.logger = Logger.new(STDOUT)
 end
 
 def set_data
@@ -28,10 +26,14 @@ end
 
 def run
   worker_pids = []
-  WORKERS_COUNT.times do
-    worker_pids << spawn("QUEUE=normal INTERVAL=0.1 rake resque:work")
+  1.upto(WORKERS_COUNT) do |i|
+    worker_pids << spawn("DYNO='worker.#{i}' QUEUE=normal INTERVAL=0.1 bundle exec rake resque:work")
   end
 
+  loop do
+    break if Resque::Stat.get(:processed) > 0
+    sleep(1)
+  end
   loop do
     if Resque.workers.any?(&:working?)
       sleep(1)

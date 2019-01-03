@@ -3,7 +3,7 @@ $stdout.sync = true
 Bundler.require
 Resque.redis = 'localhost:6379'
 Resque.redis.namespace = "resque:resque_plugin_sandbox"
-#Resque.logger = Logger.new(STDOUT)
+Resque.logger = Logger.new('./log/resque.log')
 
 class Base
   def self.job_queue(*args)
